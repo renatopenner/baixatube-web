@@ -1,0 +1,17 @@
+{
+  "name": "BaixaTube Web — Penner Tech",
+  "short_name": "BaixaTube",
+  "description": "Baixe vídeos e áudios do YouTube, Instagram, TikTok e Facebook direto no celular ou PC e compartilhe em 1 toque.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0284c7",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

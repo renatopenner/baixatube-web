@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>
+(function(){
+  try {
+    var m = document.cookie.match(/(?:^|;\s*)pt_tema=(escuro|claro)/);
+    var saved = localStorage.getItem('pt_tema');
+    var tema = (m && m[1]) || saved || 'claro';
+    document.documentElement.setAttribute('data-tema', tema);
+  } catch (e) {
+    document.documentElement.setAttribute('data-tema', 'claro');
+  }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>BaixaTube Web — Baixe vídeos e áudios no celular ou PC · Penner Tech</title>
+<meta name="description" content="Baixe vídeos e áudios do YouTube, Instagram, TikTok e Facebook direto pelo navegador no celular ou computador, com botão nativo de compartilhar para WhatsApp, Telegram e redes.">
+<link rel="canonical" href="https://baixatube.pennertech.com.br/">
+<meta name="theme-color" content="#f7fafc" id="meta-theme-color">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BaixaTube Web · Penner Tech">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BaixaTube Web — Baixe vídeos e áudios no celular ou PC">
+<meta property="og:description" content="Cole o link do YouTube, Instagram, TikTok ou Facebook, escolha a qualidade (MP4 até 4K ou MP3 320 kbps), baixe no celular e compartilhe em 1 toque.">
+<meta property="og:url" content="https://baixatube.pennertech.com.br/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<style>
+:root {
+  --bg: #f7fafc;
+  --bg2: #eef3f8;
+  --card: #ffffff;
+  --card2: #f8fafc;
+  --linha: #e2e8f0;
+  --borda: #dbe3ec;
+  --texto: #0f172a;
+  --texto-corpo: #334155;
+  --texto-sub: #64748b;
+  --acento: #0284c7;
+  --acento2: #0369a1;
+  --acento-suave: #e0f2fe;
+  --vermelho: #dc2626;
+  --vermelho-suave: #fee2e2;
+  --verde: #15803d;
+  --verde-suave: #dcfce7;
+  --ambar: #b45309;
+  --ambar-suave: #fef3c7;
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --sombra: 0 1px 3px rgba(15, 23, 42, 0.05), 0 12px 32px rgba(15, 23, 42, 0.06);
+  --radial1: rgba(2, 132, 199, 0.10);
+  --radial2: rgba(220, 38, 38, 0.06);
+}
+html[data-tema="escuro"] {
+  --bg: #070d17;
+  --bg2: #0d1626;
+  --card: #111c2d;
+  --card2: #162338;
+  --linha: #1e324d;
+  --borda: #233a59;
+  --texto: #f8fafc;
+  --texto-corpo: #cbd5e1;
+  --texto-sub: #94a3b8;
+  --acento: #38bdf8;
+  --acento2: #0284c7;
+  --acento-suave: rgba(56, 189, 248, 0.14);
+  --vermelho: #f87171;
+  --vermelho-suave: rgba(248, 113, 113, 0.15);
+  --verde: #4ade80;
+  --verde-suave: rgba(74, 222, 128, 0.14);
+  --ambar: #fbbf24;
+  --ambar-suave: rgba(251, 191, 36, 0.14);
+  --header-bg: rgba(7, 13, 23, 0.88);
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --radial1: rgba(56, 189, 248, 0.14);
+  --radial2: rgba(239, 68, 68, 0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--texto);
+  font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(950px 450px at 80% -10%, var(--radial1), transparent 62%),
+    radial-gradient(850px 420px at 10% 105%, var(--radial2), transparent 65%);
+}
+a { color: var(--acento); text-decoration: none; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 18px; width: 100%; }
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--linha);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 12px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--texto);
+}
+.brand svg { width: 38px; height: 38px; flex: 0 0 auto; }
+.brand-txt { line-height: 1.1; }
+.brand-txt strong { font-size: 1.12rem; font-weight: 800; letter-spacing: -0.02em; }
+.brand-txt strong em { color: var(--acento); font-style: normal; }
+.brand-txt small { display: block; font-size: 0.72rem; color: var(--texto-sub); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-link {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--texto-corpo);
+  padding: 7px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--borda);
+  background: var(--card);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.nav-link:hover { border-color: var(--acento); transform: translateY(-1px); }
+.btn-tema {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  background: var(--card);
+  color: var(--texto);
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-tema:hover { border-color: var(--acento); }
+
+/* Status bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 9px 14px;
+  margin-top: 18px;
+  font-size: 0.83rem;
+  color: var(--texto-sub);
+  box-shadow: var(--sombra);
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #94a3b8; flex: 0 0 auto; }
+.dot.ok { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.65); }
+.dot.warn { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.65); }
+.dot.err { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.65); }
+.ttl-pill {
+  margin-left: auto;
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-weight: 700;
+  font-size: 0.76rem;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+/* Hero & Input */
+.hero { padding: 26px 0 16px; text-align: center; }
+.hero h1 { font-size: clamp(1.65rem, 4.5vw, 2.5rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.12; }
+.hero h1 em { color: var(--acento); font-style: normal; }
+.hero p { color: var(--texto-sub); font-size: 0.98rem; max-width: 620px; margin: 10px auto 0; }
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--sombra);
+  margin-top: 18px;
+}
+.url-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.url-input-wrap {
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+  background: var(--card2);
+  border: 1.5px solid var(--borda);
+  border-radius: 13px;
+  padding: 4px 6px 4px 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.url-input-wrap:focus-within {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--acento-suave);
+}
+.url-input-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--texto);
+  font-size: 0.98rem;
+  padding: 10px 4px;
+  outline: none;
+  min-width: 0;
+}
+.btn-paste {
+  border: 1px solid var(--borda);
+  background: var(--card);
+  color: var(--texto-corpo);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 11px;
+  border-radius: 9px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-paste:hover { border-color: var(--acento); color: var(--acento); }
+
+.action-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.12s, opacity 0.15s, background 0.15s;
+  text-decoration: none;
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-primary { background: var(--acento2); color: #fff; }
+html[data-tema="escuro"] .btn-primary { background: var(--acento); color: #04121d; }
+.btn-secondary { background: var(--card2); color: var(--texto); border: 1px solid var(--borda); }
+.btn-secondary:hover { border-color: var(--acento); }
+.btn-green { background: #16a34a; color: #fff; }
+.btn-share { background: #2563eb; color: #fff; }
+.btn-danger { background: var(--vermelho-suave); color: var(--vermelho); border: 1px solid transparent; }
+
+/* Presets Grid */
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--texto-sub);
+  margin: 18px 0 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 8px;
+}
+.preset-chip {
+  background: var(--card2);
+  border: 1.5px solid var(--borda);
+  border-radius: 12px;
+  padding: 10px 11px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  color: var(--texto);
+}
+.preset-chip:hover { border-color: var(--acento); }
+.preset-chip.active {
+  background: var(--acento-suave);
+  border-color: var(--acento);
+}
+.preset-chip strong { display: block; font-size: 0.88rem; font-weight: 700; }
+.preset-chip span { display: block; font-size: 0.72rem; color: var(--texto-sub); margin-top: 2px; line-height: 1.25; }
+
+/* Video Meta Card */
+.meta-card {
+  display: none;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--linha);
+}
+.meta-card.visible { display: block; }
+.meta-top {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.meta-thumb {
+  width: 168px;
+  aspect-ratio: 16/9;
+  border-radius: 11px;
+  object-fit: cover;
+  background: var(--card2);
+  border: 1px solid var(--borda);
+  flex: 0 0 auto;
+}
+.meta-info { flex: 1 1 220px; min-width: 0; }
+.meta-info h2 { font-size: 1.06rem; font-weight: 700; line-height: 1.32; margin-bottom: 6px; word-break: break-word; }
+.meta-badges { display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.79rem; color: var(--texto-sub); }
+.meta-badge { background: var(--card2); border: 1px solid var(--borda); padding: 3px 9px; border-radius: 7px; font-weight: 600; }
+
+.formats-toggle {
+  margin-top: 12px;
+}
+.formats-select {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--borda);
+  background: var(--card2);
+  color: var(--texto);
+  font-size: 0.88rem;
+}
+
+/* Queue / Jobs */
+.jobs-wrap { margin-top: 24px; margin-bottom: 44px; }
+.jobs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.jobs-header h3 { font-size: 1.05rem; font-weight: 800; }
+.job-card {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--sombra);
+}
+.job-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.job-title { font-weight: 700; font-size: 0.96rem; line-height: 1.35; word-break: break-word; }
+.job-sub { font-size: 0.8rem; color: var(--texto-sub); margin-top: 3px; display: flex; gap: 10px; flex-wrap: wrap; }
+.job-badge {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.job-badge.running { background: var(--acento-suave); color: var(--acento); }
+.job-badge.done { background: var(--verde-suave); color: var(--verde); }
+.job-badge.error { background: var(--vermelho-suave); color: var(--vermelho); }
+.job-badge.expired { background: var(--ambar-suave); color: var(--ambar); }
+
+.progress-track {
+  height: 8px;
+  background: var(--card2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 12px 0 8px;
+  border: 1px solid var(--linha);
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acento2), var(--acento));
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+.job-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--texto-sub);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.job-actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linha);
+}
+.job-actions .btn { flex: 1 1 160px; padding: 11px 14px; font-size: 0.88rem; }
+
+.alert-box {
+  display: none;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  background: var(--vermelho-suave);
+  color: var(--vermelho);
+  font-size: 0.87rem;
+  font-weight: 600;
+}
+.alert-box.visible { display: block; }
+
+/* Info cards */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 16px;
+}
+.info-card h4 { font-size: 0.92rem; font-weight: 800; margin-bottom: 6px; color: var(--texto); }
+.info-card p { font-size: 0.83rem; color: var(--texto-sub); line-height: 1.48; }
+
+footer {
+  margin-top: auto;
+  border-top: 1px solid var(--linha);
+  padding: 22px 0;
+  font-size: 0.82rem;
+  color: var(--texto-sub);
+  text-align: center;
+}
+footer a { font-weight: 600; }
+
+@media (max-width: 640px) {
+  .url-row { flex-direction: column; }
+  .action-btns { width: 100%; }
+  .action-btns .btn { flex: 1; }
+  .meta-thumb { width: 100%; }
+  .presets-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 64 64" role="img" aria-label="BaixaTube">
+        <defs>
+          <linearGradient id="btG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="55%" stop-color="#0ea5e9"/>
+            <stop offset="100%" stop-color="#ef4444"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="16" fill="url(#btG)"/>
+        <path d="M32 15v21" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/>
+        <path d="m22 28 10 10 10-10" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M18 47h28" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".92"/>
+      </svg>
+      <div class="brand-txt">
+        <strong>BAIXA<em>TUBE</em> WEB</strong>
+        <small>Penner Tech · Celular &amp; PC</small>
+      </div>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="https://baixa.pennertech.com.br/" target="_blank" rel="noopener">Baixa Certa ↗</a>
+      <a class="nav-link" href="https://loja.pennertech.com.br/" target="_blank" rel="noopener">Loja ↗</a>
+      <button id="btn-tema" class="btn-tema" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="status-bar" id="status-bar">
+    <span class="dot" id="api-dot"></span>
+    <span id="api-txt">Conectando ao motor BaixaTube no PennerServer2…</span>
+    <span class="ttl-pill">⏱ Autoexclusão em 30 min</span>
+  </div>
+
+  <section class="hero">
+    <h1>Baixe vídeos e áudios <em>direto no celular</em></h1>
+    <p>Cole o link do YouTube, Instagram, TikTok ou Facebook. O servidor processa em container isolado, libera o download e permite <strong>compartilhar o arquivo direto no WhatsApp</strong>.</p>
+  </section>
+
+  <section class="panel">
+    <div class="url-row">
+      <div class="url-input-wrap">
+        <input id="url-input" type="url" placeholder="Cole aqui o link do YouTube, Instagram, TikTok, Facebook…" autocomplete="off" spellcheck="false">
+        <button id="btn-paste" class="btn-paste" type="button">📋 Colar</button>
+      </div>
+      <div class="action-btns">
+        <button id="btn-analyze" class="btn btn-secondary" type="button">🔍 Analisar formatos</button>
+        <button id="btn-download" class="btn btn-primary" type="button">⬇ Baixar agora</button>
+      </div>
+    </div>
+
+    <div id="alert-box" class="alert-box"></div>
+
+    <div class="section-label">
+      <span>Qualidade / Formato (Presets)</span>
+      <span id="preset-hint" style="font-weight:600;text-transform:none;letter-spacing:0">Até 4K H.264/AAC — roda direto no celular, WhatsApp e TV</span>
+    </div>
+    <div class="presets-grid" id="presets-grid"></div>
+
+    <div class="meta-card" id="meta-card">
+      <div class="meta-top">
+        <img id="meta-thumb" class="meta-thumb" src="" alt="Miniatura do vídeo">
+        <div class="meta-info">
+          <h2 id="meta-title">—</h2>
+          <div class="meta-badges">
+            <span class="meta-badge" id="meta-uploader">👤 —</span>
+            <span class="meta-badge" id="meta-duration">⏱ —</span>
+            <span class="meta-badge" id="meta-extractor">🌐 —</span>
+          </div>
+          <div class="formats-toggle">
+            <label for="format-select" style="font-size:0.8rem;font-weight:700;color:var(--texto-sub)">Ou escolha uma faixa específica da plataforma:</label>
+            <select id="format-select" class="formats-select">
+              <option value="">Usar o Preset selecionado acima (Recomendado)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="jobs-wrap">
+    <div class="jobs-header">
+      <h3>Fila de Downloads Temporários</h3>
+      <span style="font-size:0.8rem;color:var(--texto-sub)">Os arquivos são apagados automaticamente em 30 minutos</span>
+    </div>
+    <div id="jobs-list">
+      <p id="jobs-empty" style="color:var(--texto-sub);font-size:0.9rem;text-align:center;padding:24px 0;">Nenhum download iniciado nesta sessão. Cole um link acima e toque em <strong>Baixar agora</strong>.</p>
+    </div>
+  </section>
+
+  <section class="info-grid">
+    <div class="info-card">
+      <h4>📲 Botão Compartilhar Nativo</h4>
+      <p>Assim que o vídeo ou MP3 fica pronto, toque em <strong>Compartilhar Arquivo</strong> para enviar o vídeo diretamente para o WhatsApp, Telegram, Instagram ou salvar nos Arquivos/Galeria do celular.</p>
+    </div>
+    <div class="info-card">
+      <h4>🔒 Container Docker Blindado</h4>
+      <p>Todo o processamento do <code>yt-dlp + FFmpeg</code> ocorre num container Docker isolado em <code>read-only</code>, sem privilégios de root e com pasta temporária apartada.</p>
+    </div>
+    <div class="info-card">
+      <h4>🧹 Limpeza Automática (30 min)</h4>
+      <p>Para não ocupar o SSD do servidor, cada arquivo possui um cronômetro regressivo de 30 minutos e é excluído permanentemente após esse prazo (ou na hora, se você clicar em Excluir).</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>BaixaTube Web</strong> · Ecossistema <a href="https://loja.pennertech.com.br/">Penner Tech</a> &amp; <a href="https://baixa.pennertech.com.br/">Baixa Certa</a> · Motor local no PennerServer2</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ------------------------------------------------------------------ */
+  /* Tema Claro / Escuro                                                */
+  /* ------------------------------------------------------------------ */
+  var btnTema = document.getElementById('btn-tema');
+  var metaTheme = document.getElementById('meta-theme-color');
+  function syncTemaBtn() {
+    var atual = document.documentElement.getAttribute('data-tema') || 'claro';
+    btnTema.textContent = (atual === 'escuro') ? '☀️' : '🌙';
+    if (metaTheme) metaTheme.setAttribute('content', atual === 'escuro' ? '#070d17' : '#f7fafc');
+  }
+  syncTemaBtn();
+  btnTema.addEventListener('click', function(){
+    var atual = document.documentElement.getAttribute('data-tema') || 'claro';
+    var novo = (atual === 'escuro') ? 'claro' : 'escuro';
+    document.documentElement.setAttribute('data-tema', novo);
+    try {
+      localStorage.setItem('pt_tema', novo);
+      document.cookie = 'pt_tema=' + novo + ';path=/;max-age=31536000;SameSite=Lax';
+    } catch (e) {}
+    syncTemaBtn();
+  });
+
+  /* ------------------------------------------------------------------ */
+  /* Descoberta automática de rota para a API no PennerServer2 (.81)    */
+  /* ------------------------------------------------------------------ */
+  var ENDPOINTS = [];
+  if (location.protocol === 'http:' && (location.hostname === '192.168.100.81' || location.hostname === '100.72.106.55' || location.hostname === 'localhost')) {
+    ENDPOINTS.push({ url: location.origin + '/baixatube-api', label: 'Local Direto' });
+    ENDPOINTS.push({ url: 'http://' + location.hostname + ':8091', label: 'Porta 8091 Direta' });
+  }
+  ENDPOINTS.push(
+    { url: 'https://pennerflix.duckdns.org:8095/baixatube-api', label: 'DuckDNS IPv6 Velocidade Máxima (.81)' },
+    { url: 'https://pennerserver2.tail69feb4.ts.net/baixatube-api', label: 'Tailscale Funnel HTTPS (.81)' },
+    { url: 'https://pennerserver2.tail69feb4.ts.net:10000/baixatube-api', label: 'Tailscale Funnel :10000 (.81)' }
+  );
+  if (location.protocol === 'http:') {
+    ENDPOINTS.push(
+      { url: 'http://192.168.100.81:8091', label: 'LAN Wi-Fi (192.168.100.81:8091)' },
+      { url: 'http://100.72.106.55:8091', label: 'Tailscale P2P (100.72.106.55:8091)' }
+    );
+  }
+
+  var activeApi = null;
+  var apiDot = document.getElementById('api-dot');
+  var apiTxt = document.getElementById('api-txt');
+
+  function probeEndpoint(ep, timeoutMs) {
+    return new Promise(function(resolve){
+      var ctl = new AbortController();
+      var t = setTimeout(function(){ ctl.abort(); resolve(null); }, timeoutMs || 3500);
+      fetch(ep.url + '/api/health', { signal: ctl.signal, cache: 'no-store' })
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(data){
+          clearTimeout(t);
+          if (data && data.status === 'ok') resolve({ ep: ep, health: data });
+          else resolve(null);
+        })
+        .catch(function(){ clearTimeout(t); resolve(null); });
+    });
+  }
+
+  async function discoverApi() {
+    for (var i = 0; i < ENDPOINTS.length; i++) {
+      var res = await probeEndpoint(ENDPOINTS[i], 3200);
+      if (res) {
+        activeApi = res.ep.url;
+        apiDot.className = 'dot ok';
+        apiTxt.innerHTML = 'Motor online: <strong>' + res.ep.label + '</strong> · yt-dlp ' + (res.health.yt_dlp || '');
+        return activeApi;
+      }
+    }
+    apiDot.className = 'dot err';
+    apiTxt.innerHTML = 'Servidor temporariamente inacessível. Verifique se o <strong>pennerserver2 (.81)</strong> está online.';
+    return null;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Presets                                                            */
+  /* ------------------------------------------------------------------ */
+  var DEFAULT_PRESETS = [
+    { id: 'best_mp4', label: 'Melhor MP4', sub: 'H.264/AAC Compatível', hint: 'Até 4K H.264/AAC — roda direto no celular, WhatsApp e TV' },
+    { id: '1080p', label: 'Full HD 1080p', sub: 'Vídeo MP4', hint: 'Melhor resolução até 1080p em MP4' },
+    { id: '720p', label: 'HD 720p', sub: 'Ideal p/ Celular', hint: 'Equilíbrio ideal entre qualidade e tamanho para celular' },
+    { id: '480p', label: '480p', sub: 'Ótimo p/ WhatsApp', hint: 'Vídeo compacto, ótimo para enviar no WhatsApp' },
+    { id: '360p', label: '360p Leve', sub: 'Economiza dados', hint: 'Arquivo super leve e rápido para economizar dados' },
+    { id: '2160p', label: '4K Ultra HD', sub: '2160p MP4', hint: 'Máxima resolução até 2160p (AV1/VP9 em MP4)' },
+    { id: 'mp3', label: 'MP3 320 kbps', sub: 'Só Áudio MP3', hint: 'Extrai apenas o áudio em MP3 320 kbps de alta qualidade' },
+    { id: 'm4a', label: 'Áudio M4A', sub: 'AAC Original', hint: 'Áudio AAC original sem perda de recodificação' }
+  ];
+
+  var selectedPresetId = 'best_mp4';
+  var presetsGrid = document.getElementById('presets-grid');
+  var presetHint = document.getElementById('preset-hint');
+
+  function renderPresets() {
+    presetsGrid.innerHTML = '';
+    DEFAULT_PRESETS.forEach(function(p){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'preset-chip' + (p.id === selectedPresetId ? ' active' : '');
+      btn.innerHTML = '<strong>' + p.label + '</strong><span>' + p.sub + '</span>';
+      btn.addEventListener('click', function(){
+        selectedPresetId = p.id;
+        presetHint.textContent = p.hint;
+        var formatSel = document.getElementById('format-select');
+        if (formatSel) formatSel.value = '';
+        renderPresets();
+      });
+      presetsGrid.appendChild(btn);
+    });
+  }
+  renderPresets();
+
+  /* ------------------------------------------------------------------ */
+  /* UI & Eventos de Análise e Download                                 */
+  /* ------------------------------------------------------------------ */
+  var urlInput = document.getElementById('url-input');
+  var btnPaste = document.getElementById('btn-paste');
+  var btnAnalyze = document.getElementById('btn-analyze');
+  var btnDownload = document.getElementById('btn-download');
+  var alertBox = document.getElementById('alert-box');
+  var metaCard = document.getElementById('meta-card');
+  var formatSelect = document.getElementById('format-select');
+  var currentMeta = null;
+
+  function showAlert(msg) {
+    if (!msg) {
+      alertBox.className = 'alert-box';
+      alertBox.textContent = '';
+      return;
+    }
+    alertBox.textContent = msg;
+    alertBox.className = 'alert-box visible';
+  }
+
+  btnPaste.addEventListener('click', async function(){
+    showAlert('');
+    try {
+      var t = await navigator.clipboard.readText();
+      if (t) {
+        urlInput.value = t.trim();
+        urlInput.focus();
+      }
+    } catch (e) {
+      urlInput.focus();
+      showAlert('Toque e segure no campo de texto para colar o link.');
+    }
+  });
+
+  // Suporte a ?url= na query string (atalhos de compartilhamento)
+  try {
+    var params = new URLSearchParams(location.search);
+    var sharedUrl = params.get('url') || params.get('text');
+    if (sharedUrl) {
+      var mUrl = sharedUrl.match(/https?:\/\/[^\s]+/);
+      if (mUrl) urlInput.value = mUrl[0];
+    }
+  } catch (e) {}
+
+  btnAnalyze.addEventListener('click', async function(){
+    var url = urlInput.value.trim();
+    if (!url) {
+      showAlert('Cole um link do YouTube, Instagram, TikTok ou Facebook primeiro.');
+      urlInput.focus();
+      return;
+    }
+    showAlert('');
+    if (!activeApi) await discoverApi();
+    if (!activeApi) {
+      showAlert('Não foi possível conectar ao servidor de download.');
+      return;
+    }
+    btnAnalyze.disabled = true;
+    btnAnalyze.textContent = '⏳ Analisando…';
+    try {
+      var resp = await fetch(activeApi + '/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url })
+      });
+      var data = await resp.json();
+      if (!resp.ok) throw new Error(data.detail || 'Erro ao analisar link.');
+      currentMeta = data;
+      document.getElementById('meta-title').textContent = data.title || 'Vídeo';
+      document.getElementById('meta-uploader').textContent = '👤 ' + (data.uploader || '—');
+      document.getElementById('meta-duration').textContent = '⏱ ' + (data.duration_human || '—');
+      document.getElementById('meta-extractor').textContent = '🌐 ' + (data.extractor || 'Web');
+      var thumbEl = document.getElementById('meta-thumb');
+      if (data.thumbnail) {
+        thumbEl.src = data.thumbnail;
+        thumbEl.style.display = 'block';
+      } else {
+        thumbEl.style.display = 'none';
+      }
+      formatSelect.innerHTML = '<option value="">Usar o Preset selecionado acima (Recomendado)</option>';
+      (data.formats || []).forEach(function(f){
+        var opt = document.createElement('option');
+        opt.value = JSON.stringify({
+          selector: f.selector,
+          label: f.label,
+          audio_only: f.kind === 'audio',
+          merge_ext: f.kind === 'audio' ? '' : 'mp4'
+        });
+        opt.textContent = f.kind_label + ' — ' + f.label;
+        formatSelect.appendChild(opt);
+      });
+      metaCard.className = 'meta-card visible';
+    } catch (err) {
+      showAlert(err.message || 'Falha ao analisar o link.');
+    } finally {
+      btnAnalyze.disabled = false;
+      btnAnalyze.textContent = '🔍 Analisar formatos';
+    }
+  });
+
+  /* ------------------------------------------------------------------ */
+  /* Fila de Jobs e Compartilhamento Mobile (Web Share API Level 2)     */
+  /* ------------------------------------------------------------------ */
+  var jobs = [];
+  var jobsList = document.getElementById('jobs-list');
+  var jobsEmpty = document.getElementById('jobs-empty');
+
+  function formatRemaining(sec) {
+    if (sec <= 0) return 'Expirado';
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return m + 'm ' + (s < 10 ? '0' : '') + s + 's';
+  }
+
+  btnDownload.addEventListener('click', async function(){
+    var url = urlInput.value.trim();
+    if (!url) {
+      showAlert('Cole um link para baixar.');
+      urlInput.focus();
+      return;
+    }
+    showAlert('');
+    if (!activeApi) await discoverApi();
+    if (!activeApi) {
+      showAlert('Não foi possível conectar ao servidor.');
+      return;
+    }
+
+    var payload = {
+      url: url,
+      title: (currentMeta && currentMeta.url === url && currentMeta.title) ? currentMeta.title : 'Vídeo',
+      preset_id: selectedPresetId
+    };
+    if (formatSelect.value) {
+      try {
+        var customFmt = JSON.parse(formatSelect.value);
+        payload.format_selector = customFmt.selector;
+        payload.label = customFmt.label;
+        payload.audio_only = customFmt.audio_only;
+        payload.merge_ext = customFmt.merge_ext;
+      } catch (e) {}
+    }
+
+    btnDownload.disabled = true;
+    btnDownload.textContent = '⏳ Iniciando…';
+    try {
+      var resp = await fetch(activeApi + '/api/jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      var job = await resp.json();
+      if (!resp.ok) throw new Error(job.detail || 'Não foi possível iniciar o download.');
+      job._apiBase = activeApi;
+      jobs.unshift(job);
+      renderJobs();
+      pollJob(job.id, activeApi);
+    } catch (err) {
+      showAlert(err.message || 'Erro ao criar download.');
+    } finally {
+      btnDownload.disabled = false;
+      btnDownload.textContent = '⬇ Baixar agora';
+    }
+  });
+
+  async function pollJob(jobId, apiBase) {
+    var timer = setInterval(async function(){
+      var idx = jobs.findIndex(function(j){ return j.id === jobId; });
+      if (idx === -1) { clearInterval(timer); return; }
+      try {
+        var r = await fetch(apiBase + '/api/jobs/' + jobId, { cache: 'no-store' });
+        if (!r.ok) { clearInterval(timer); return; }
+        var updated = await r.json();
+        updated._apiBase = apiBase;
+        var prevState = jobs[idx].state;
+        jobs[idx] = updated;
+        renderJobs();
+        if (updated.state === 'done' || updated.state === 'error' || updated.state === 'cancelled' || updated.state === 'expired') {
+          clearInterval(timer);
+        }
+      } catch (e) {}
+    }, 1200);
+  }
+
+  // Atualiza contador regressivo de 30 minutos a cada segundo
+  setInterval(function(){
+    var changed = false;
+    var now = Math.floor(Date.now() / 1000);
+    jobs.forEach(function(j){
+      if (j.state === 'done' && j.expires_at) {
+        var rem = Math.max(0, j.expires_at - now);
+        if (rem !== j.remaining_seconds) {
+          j.remaining_seconds = rem;
+          if (rem === 0) j.state = 'expired';
+          changed = true;
+        }
+      }
+    });
+    if (changed) renderJobs();
+  }, 1000);
+
+  window.shareJobFile = async function(jobId) {
+    var job = jobs.find(function(j){ return j.id === jobId; });
+    if (!job || !job.download_url) return;
+    var fileUrl = job._apiBase + job.download_url;
+    var btn = document.getElementById('share-btn-' + jobId);
+    var oldTxt = btn ? btn.innerHTML : '';
+
+    try {
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '⏳ Preparando arquivo p/ compartilhar…';
+      }
+      var resp = await fetch(fileUrl);
+      if (!resp.ok) throw new Error('Arquivo expirado ou indisponível.');
+      var blob = await resp.blob();
+      var fileName = job.file_name || ('baixatube-' + job.id + '.mp4');
+      var file = new File([blob], fileName, { type: job.mime_type || blob.type || 'video/mp4' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: job.title || fileName,
+          text: job.title || ''
+        });
+        return;
+      }
+      // Fallback caso o navegador suporte apenas compartilhamento de link
+      if (navigator.share) {
+        await navigator.share({
+          title: job.title || 'BaixaTube Web',
+          text: 'Baixado no BaixaTube Web: ' + (job.title || ''),
+          url: fileUrl
+        });
+        return;
+      }
+      await navigator.clipboard.writeText(fileUrl);
+      alert('Link temporário copiado para a área de transferência!');
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+      alert('Não foi possível abrir o menu de compartilhamento direto. Use o botão "Salvar no Aparelho" ao lado.');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = oldTxt;
+      }
+    }
+  };
+
+  window.deleteJob = async function(jobId) {
+    var idx = jobs.findIndex(function(j){ return j.id === jobId; });
+    if (idx === -1) return;
+    var job = jobs[idx];
+    try {
+      await fetch(job._apiBase + '/api/jobs/' + jobId, { method: 'DELETE' });
+    } catch (e) {}
+    jobs.splice(idx, 1);
+    renderJobs();
+  };
+
+  function renderJobs() {
+    if (!jobs.length) {
+      jobsList.innerHTML = '';
+      jobsList.appendChild(jobsEmpty);
+      jobsEmpty.style.display = 'block';
+      return;
+    }
+    jobsEmpty.style.display = 'none';
+    jobsList.innerHTML = '';
+
+    jobs.forEach(function(j){
+      var card = document.createElement('div');
+      card.className = 'job-card';
+
+      var badgeClass = 'running';
+      var badgeTxt = 'Processando';
+      if (j.state === 'done') { badgeClass = 'done'; badgeTxt = 'Concluído'; }
+      else if (j.state === 'error' || j.state === 'cancelled') { badgeClass = 'error'; badgeTxt = j.state === 'error' ? 'Erro' : 'Cancelado'; }
+      else if (j.state === 'expired') { badgeClass = 'expired'; badgeTxt = 'Expirado (30m)'; }
+
+      var pct = Math.round((j.progress || 0) * 100);
+      var fileUrl = j.download_url ? (j._apiBase + j.download_url) : '#';
+
+      var actionsHtml = '';
+      if (j.state === 'done') {
+        actionsHtml =
+          '<div class="job-actions">' +
+            '<a class="btn btn-green" href="' + fileUrl + '" download="' + (j.file_name || '') + '" target="_blank" rel="noopener">📥 Salvar no Aparelho (' + (j.file_size_human || '') + ')</a>' +
+            '<button id="share-btn-' + j.id + '" class="btn btn-share" type="button" onclick="shareJobFile(\'' + j.id + '\')">📤 Compartilhar Arquivo</button>' +
+            '<button class="btn btn-danger" type="button" style="flex:0 0 auto" onclick="deleteJob(\'' + j.id + '\')" title="Apagar do servidor agora">🗑 Excluir</button>' +
+          '</div>';
+      } else if (j.state === 'queued' || j.state === 'downloading' || j.state === 'processing') {
+        actionsHtml =
+          '<div class="job-actions">' +
+            '<button class="btn btn-danger" type="button" onclick="deleteJob(\'' + j.id + '\')">✕ Cancelar download</button>' +
+          '</div>';
+      } else {
+        actionsHtml =
+          '<div class="job-actions">' +
+            '<button class="btn btn-secondary" type="button" onclick="deleteJob(\'' + j.id + '\')">Limpar da lista</button>' +
+          '</div>';
+      }
+
+      var ttlText = (j.state === 'done')
+        ? ('⏱ Expira em: <strong>' + formatRemaining(j.remaining_seconds || 0) + '</strong>')
+        : ('Velocidade: ' + (j.speed || '—') + ' · ETA: ' + (j.eta || '—'));
+
+      card.innerHTML =
+        '<div class="job-top">' +
+          '<div>' +
+            '<div class="job-title">' + (j.title || 'Vídeo') + '</div>' +
+            '<div class="job-sub">' +
+              '<span>🎯 ' + (j.label || 'MP4') + '</span>' +
+              (j.file_name ? '<span>📄 ' + j.file_name + '</span>' : '') +
+            '</div>' +
+          '</div>' +
+          '<span class="job-badge ' + badgeClass + '">' + badgeTxt + '</span>' +
+        '</div>' +
+        '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="job-stats">' +
+          '<span>' + (j.error ? ('❌ ' + j.error) : (j.stage || '')) + '</span>' +
+          '<span>' + ttlText + '</span>' +
+        '</div>' +
+        actionsHtml;
+
+      jobsList.appendChild(card);
+    });
+  }
+
+  discoverApi();
+})();
+</script>
+</body>
+</html>
