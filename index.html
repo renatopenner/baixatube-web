@@ -722,7 +722,7 @@ footer a { font-weight: 600; }
 <main class="wrap">
   <div class="status-bar" id="status-bar">
     <span class="dot" id="api-dot"></span>
-    <span id="api-txt">Conectando ao motor BaixaTube no PennerServer2…</span>
+    <span id="api-txt">Conectando ao servidor…</span>
     <span class="ttl-pill">⏱ Autoexclusão em 30 min</span>
   </div>
 
@@ -832,7 +832,7 @@ footer a { font-weight: 600; }
 
 <footer>
   <div class="wrap">
-    <p><strong>BaixaTube Web</strong> · Ecossistema <a href="https://loja.pennertech.com.br/">Penner Tech</a> &amp; <a href="https://baixa.pennertech.com.br/">Baixa Certa</a> · Motor local no PennerServer2</p>
+    <p><strong>BaixaTube Web</strong> · Ecossistema <a href="https://loja.pennertech.com.br/">Penner Tech</a> &amp; <a href="https://baixa.pennertech.com.br/">Baixa Certa</a></p>
   </div>
 </footer>
 
@@ -905,12 +905,12 @@ footer a { font-weight: 600; }
       if (res) {
         activeApi = res.ep.url;
         apiDot.className = 'dot ok';
-        apiTxt.innerHTML = 'Motor online: <strong>' + res.ep.label + '</strong> · yt-dlp ' + (res.health.yt_dlp || '');
+        apiTxt.innerHTML = '<strong>Pronto para baixar</strong> · Vídeos e áudios em até 4K';
         return activeApi;
       }
     }
     apiDot.className = 'dot err';
-    apiTxt.innerHTML = 'Servidor temporariamente inacessível. Verifique se o <strong>pennerserver2 (.81)</strong> está online.';
+    apiTxt.innerHTML = 'Servidor temporariamente ocupado. Tente novamente em instantes.';
     return null;
   }
 
