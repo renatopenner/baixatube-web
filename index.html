@@ -1761,11 +1761,11 @@ footer a { font-weight: 600; }
               SAVE_SVG +
               '<span>Salvar no Aparelho' + (j.file_size_human ? ' (' + j.file_size_human + ')' : '') + '</span>' +
             '</a>' +
-            '<button id="share-btn-' + j.id + '" class="btn btn-share" type="button" onclick="shareJobFile('' + j.id + '')">' +
+            '<button id="share-btn-' + j.id + '" class="btn btn-share" type="button" onclick="shareJobFile(\'' + j.id + '\')">' +
               SHARE_SVG +
               '<span>Compartilhar</span>' +
             '</button>' +
-            '<button class="btn btn-danger" type="button" style="flex:0 0 auto" onclick="deleteJob('' + j.id + '')" title="Apagar do servidor agora">' +
+            '<button class="btn btn-danger" type="button" style="flex:0 0 auto" onclick="deleteJob(\'' + j.id + '\')" title="Apagar do servidor agora">' +
               TRASH_SVG +
               '<span>Excluir</span>' +
             '</button>' +
