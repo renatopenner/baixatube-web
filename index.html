@@ -596,9 +596,152 @@ html[data-tema="escuro"] .eco-cta {
 html[data-tema="escuro"] .btn-primary { background: var(--acento); color: #04121d; }
 .btn-secondary { background: var(--card2); color: var(--texto); border: 1px solid var(--borda); }
 .btn-secondary:hover { border-color: var(--acento); }
-.btn-green { background: #16a34a; color: #fff; }
-.btn-share { background: #2563eb; color: #fff; }
+.btn-green {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.26);
+}
+.btn-green:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+.btn-share {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 52%, #4f46e5 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.30);
+  position: relative;
+  overflow: hidden;
+}
+.btn-share:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.42);
+}
+.btn-share .share-ico-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  flex: 0 0 26px;
+}
+.btn svg.btn-svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  display: block;
+}
 .btn-danger { background: var(--vermelho-suave); color: var(--vermelho); border: 1px solid transparent; }
+
+/* Share Fallback Modal (PC / Navegadores sem Web Share de arquivos) */
+.share-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(7, 13, 23, 0.68);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.share-modal-backdrop.open {
+  display: flex;
+}
+.share-modal {
+  background: var(--card);
+  border: 1.5px solid var(--borda);
+  border-radius: 20px;
+  max-width: 440px;
+  width: 100%;
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  color: var(--texto);
+}
+.share-modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.share-modal-top h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.share-modal-close {
+  border: 1px solid var(--borda);
+  background: var(--card2);
+  color: var(--texto);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.share-modal p {
+  font-size: 0.84rem;
+  color: var(--texto-sub);
+  margin-bottom: 14px;
+  line-height: 1.45;
+}
+.share-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.share-opt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--borda);
+  background: var(--card2);
+  color: var(--texto);
+  transition: transform 0.14s, border-color 0.14s;
+}
+.share-opt-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--acento);
+}
+.share-opt-btn.wa {
+  background: rgba(22, 163, 74, 0.14);
+  border-color: rgba(22, 163, 74, 0.4);
+  color: var(--verde);
+}
+.share-opt-btn.tg {
+  background: rgba(2, 132, 199, 0.14);
+  border-color: rgba(2, 132, 199, 0.4);
+  color: var(--acento);
+}
+.share-copy-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+.share-copy-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--borda);
+  background: var(--bg2);
+  color: var(--texto-corpo);
+  font-size: 0.8rem;
+}
 
 /* Presets Grid */
 .section-label {
@@ -898,6 +1041,12 @@ footer a { font-weight: 600; }
         <span>Baixa Certa</span>
         <span class="pill-tag">Apps Grátis</span>
       </a>
+      <button id="btn-share-site" class="btn-tema" type="button" title="Compartilhar o BaixaTube Web" aria-label="Compartilhar o BaixaTube Web" style="color:var(--acento);border-color:rgba(2,132,199,0.4);">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </button>
       <button id="btn-tema" class="btn-tema" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema">🌙</button>
     </div>
   </div>
@@ -1032,6 +1181,30 @@ footer a { font-weight: 600; }
   </section>
 </main>
 
+<div class="share-modal-backdrop" id="share-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
+  <div class="share-modal">
+    <div class="share-modal-top">
+      <h4 id="share-modal-title">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--acento)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        <span id="share-modal-heading">Compartilhar Download</span>
+      </h4>
+      <button type="button" class="share-modal-close" id="share-modal-close" aria-label="Fechar">✕</button>
+    </div>
+    <p id="share-modal-desc">Envie o link direto do arquivo temporário (válido por 30 minutos) ou compartilhe no WhatsApp e Telegram:</p>
+    <div class="share-modal-grid">
+      <a id="share-opt-wa" class="share-opt-btn wa" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a id="share-opt-tg" class="share-opt-btn tg" href="#" target="_blank" rel="noopener">✈️ Telegram</a>
+    </div>
+    <div class="share-copy-row">
+      <input id="share-copy-input" type="text" readonly value="">
+      <button id="share-copy-btn" type="button" class="btn btn-primary" style="padding:9px 14px;font-size:0.82rem;">Copiar Link</button>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="wrap">
     <p><strong>BaixaTube Web</strong> · Ecossistema <a href="https://loja.pennertech.com.br/">Penner Tech</a> &amp; <a href="https://baixa.pennertech.com.br/">Baixa Certa</a></p>
@@ -1071,6 +1244,7 @@ footer a { font-weight: 600; }
     ENDPOINTS.push({ url: 'http://' + location.hostname + ':8091', label: 'Porta 8091 Direta' });
   }
   ENDPOINTS.push(
+    { url: 'https://baixa.duckdns.org:8095/baixatube-api', label: 'DuckDNS Baixa IPv6 (.81)' },
     { url: 'https://pennerflix.duckdns.org:8095/baixatube-api', label: 'DuckDNS IPv6 Velocidade Máxima (.81)' },
     { url: 'https://pennerserver2.tail69feb4.ts.net/baixatube-api', label: 'Tailscale Funnel HTTPS (.81)' },
     { url: 'https://pennerserver2.tail69feb4.ts.net:10000/baixatube-api', label: 'Tailscale Funnel :10000 (.81)' }
@@ -1356,50 +1530,188 @@ footer a { font-weight: 600; }
     if (changed) renderJobs();
   }, 1000);
 
+  var SHARE_SVG =
+    '<span class="share-ico-badge">' +
+      '<svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<circle cx="18" cy="5" r="3"></circle>' +
+        '<circle cx="6" cy="12" r="3"></circle>' +
+        '<circle cx="18" cy="19" r="3"></circle>' +
+        '<line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>' +
+        '<line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>' +
+      '</svg>' +
+    '</span>';
+
+  var SAVE_SVG =
+    '<svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>' +
+      '<polyline points="7 10 12 15 17 10"></polyline>' +
+      '<line x1="12" y1="15" x2="12" y2="3"></line>' +
+    '</svg>';
+
+  var TRASH_SVG =
+    '<svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<polyline points="3 6 5 6 21 6"></polyline>' +
+      '<path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>' +
+      '<path d="M10 11v6"></path><path d="M14 11v6"></path>' +
+    '</svg>';
+
+  var shareModalBackdrop = document.getElementById('share-modal-backdrop');
+  var shareModalClose = document.getElementById('share-modal-close');
+  var shareModalHeading = document.getElementById('share-modal-heading');
+  var shareModalDesc = document.getElementById('share-modal-desc');
+  var shareOptWa = document.getElementById('share-opt-wa');
+  var shareOptTg = document.getElementById('share-opt-tg');
+  var shareCopyInput = document.getElementById('share-copy-input');
+  var shareCopyBtn = document.getElementById('share-copy-btn');
+
+  function openShareModal(title, text, url) {
+    shareModalHeading.textContent = title || 'Compartilhar';
+    shareModalDesc.textContent = text || 'Escolha onde deseja compartilhar ou copie o link abaixo:';
+    var fullMsg = (text ? (text + ' ') : '') + url;
+    shareOptWa.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(fullMsg);
+    shareOptTg.href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text || title || '');
+    shareCopyInput.value = url;
+    shareCopyBtn.textContent = 'Copiar Link';
+    shareModalBackdrop.className = 'share-modal-backdrop open';
+  }
+
+  if (shareModalClose) {
+    shareModalClose.addEventListener('click', function(){
+      shareModalBackdrop.className = 'share-modal-backdrop';
+    });
+  }
+  if (shareModalBackdrop) {
+    shareModalBackdrop.addEventListener('click', function(ev){
+      if (ev.target === shareModalBackdrop) shareModalBackdrop.className = 'share-modal-backdrop';
+    });
+  }
+  if (shareCopyBtn) {
+    shareCopyBtn.addEventListener('click', async function(){
+      try {
+        await navigator.clipboard.writeText(shareCopyInput.value);
+        shareCopyBtn.textContent = '✓ Copiado!';
+      } catch (e) {
+        shareCopyInput.select();
+        document.execCommand('copy');
+        shareCopyBtn.textContent = '✓ Copiado!';
+      }
+    });
+  }
+
+  var btnShareSite = document.getElementById('btn-share-site');
+  if (btnShareSite) {
+    btnShareSite.addEventListener('click', async function(){
+      var siteUrl = 'https://baixatube.pennertech.com.br/';
+      var siteTitle = 'BaixaTube Web — Penner Tech';
+      var siteText = 'Baixe vídeos e áudios do YouTube, Instagram, TikTok e Facebook direto no celular:';
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: siteTitle, text: siteText, url: siteUrl });
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+      openShareModal('Compartilhar o BaixaTube Web', siteText, siteUrl);
+    });
+  }
+
+  // Pré-carrega o arquivo em memória (File) assim que o job fica pronto para que o toque em
+  // "Compartilhar" acione o navigator.share imediatamente sem perder o user-gesture no celular!
+  var fileCache = {};
+  async function warmJobFileCache(job) {
+    if (!job || job.state !== 'done' || !job.download_url || fileCache[job.id]) return;
+    if (job.file_size && job.file_size > 95 * 1024 * 1024) return;
+    try {
+      fileCache[job.id] = 'loading';
+      var resp = await fetch(job._apiBase + job.download_url);
+      if (!resp.ok) { delete fileCache[job.id]; return; }
+      var blob = await resp.blob();
+      var fileName = job.file_name || ('baixatube-' + job.id + '.mp4');
+      var mime = job.mime_type || blob.type || (fileName.endsWith('.mp3') ? 'audio/mpeg' : 'video/mp4');
+      fileCache[job.id] = new File([blob], fileName, { type: mime });
+    } catch (e) {
+      delete fileCache[job.id];
+    }
+  }
+
   window.shareJobFile = async function(jobId) {
     var job = jobs.find(function(j){ return j.id === jobId; });
     if (!job || !job.download_url) return;
     var fileUrl = job._apiBase + job.download_url;
     var btn = document.getElementById('share-btn-' + jobId);
-    var oldTxt = btn ? btn.innerHTML : '';
+    var oldHtml = btn ? btn.innerHTML : '';
 
     try {
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = '⏳ Preparando arquivo p/ compartilhar…';
-      }
-      var resp = await fetch(fileUrl);
-      if (!resp.ok) throw new Error('Arquivo expirado ou indisponível.');
-      var blob = await resp.blob();
-      var fileName = job.file_name || ('baixatube-' + job.id + '.mp4');
-      var file = new File([blob], fileName, { type: job.mime_type || blob.type || 'video/mp4' });
+      var file = (fileCache[jobId] instanceof File) ? fileCache[jobId] : null;
 
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      // 1) Se o File já está em cache e o celular suporta compartilhamento de arquivo, abre na hora!
+      if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: job.title || fileName,
-          text: job.title || ''
+          title: job.title || file.name
         });
         return;
       }
-      // Fallback caso o navegador suporte apenas compartilhamento de link
+
+      // 2) Se ainda não estava no cache e o navegador tem suporte a navigator.canShare, baixa agora
+      if (!file && navigator.canShare) {
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = SHARE_SVG + '<span>Preparando arquivo…</span>';
+        }
+        var resp = await fetch(fileUrl);
+        if (resp.ok) {
+          var blob = await resp.blob();
+          var fileName = job.file_name || ('baixatube-' + job.id + '.mp4');
+          var mime = job.mime_type || blob.type || (fileName.endsWith('.mp3') ? 'audio/mpeg' : 'video/mp4');
+          file = new File([blob], fileName, { type: mime });
+          fileCache[jobId] = file;
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: job.title || fileName
+            });
+            return;
+          }
+        }
+      }
+
+      // 3) Se o navegador suporta navigator.share de URL
       if (navigator.share) {
-        await navigator.share({
-          title: job.title || 'BaixaTube Web',
-          text: 'Baixado no BaixaTube Web: ' + (job.title || ''),
-          url: fileUrl
-        });
-        return;
+        try {
+          await navigator.share({
+            title: job.title || 'BaixaTube Web',
+            text: '🎬 ' + (job.title || 'Arquivo baixado no BaixaTube Web'),
+            url: fileUrl
+          });
+          return;
+        } catch (shareUrlErr) {
+          if (shareUrlErr && shareUrlErr.name === 'AbortError') return;
+        }
       }
-      await navigator.clipboard.writeText(fileUrl);
-      alert('Link temporário copiado para a área de transferência!');
+
+      // 4) Fallback visual elegante (WhatsApp, Telegram e Copiar Link)
+      openShareModal(
+        'Compartilhar: ' + (job.title || 'Arquivo').slice(0, 48),
+        '🎬 ' + (job.title || 'Baixado no BaixaTube Web') + ' (' + (job.label || 'MP4') + '):',
+        fileUrl
+      );
     } catch (err) {
       if (err && err.name === 'AbortError') return;
-      alert('Não foi possível abrir o menu de compartilhamento direto. Use o botão "Salvar no Aparelho" ao lado.');
+      if (fileCache[jobId] instanceof File && navigator.canShare && navigator.canShare({ files: [fileCache[jobId]] })) {
+        showAlert('Arquivo pronto na memória! Toque novamente em "Compartilhar" para abrir o WhatsApp.');
+        return;
+      }
+      openShareModal(
+        'Compartilhar: ' + (job.title || 'Arquivo').slice(0, 48),
+        '🎬 ' + (job.title || 'Baixado no BaixaTube Web') + ':',
+        fileUrl
+      );
     } finally {
       if (btn) {
         btn.disabled = false;
-        btn.innerHTML = oldTxt;
+        btn.innerHTML = oldHtml;
       }
     }
   };
@@ -1408,6 +1720,7 @@ footer a { font-weight: 600; }
     var idx = jobs.findIndex(function(j){ return j.id === jobId; });
     if (idx === -1) return;
     var job = jobs[idx];
+    delete fileCache[jobId];
     try {
       await fetch(job._apiBase + '/api/jobs/' + jobId, { method: 'DELETE' });
     } catch (e) {}
@@ -1426,6 +1739,8 @@ footer a { font-weight: 600; }
     jobsList.innerHTML = '';
 
     jobs.forEach(function(j){
+      if (j.state === 'done') warmJobFileCache(j);
+
       var card = document.createElement('div');
       card.className = 'job-card';
 
@@ -1442,9 +1757,18 @@ footer a { font-weight: 600; }
       if (j.state === 'done') {
         actionsHtml =
           '<div class="job-actions">' +
-            '<a class="btn btn-green" href="' + fileUrl + '" download="' + (j.file_name || '') + '" target="_blank" rel="noopener">📥 Salvar no Aparelho (' + (j.file_size_human || '') + ')</a>' +
-            '<button id="share-btn-' + j.id + '" class="btn btn-share" type="button" onclick="shareJobFile(\'' + j.id + '\')">📤 Compartilhar Arquivo</button>' +
-            '<button class="btn btn-danger" type="button" style="flex:0 0 auto" onclick="deleteJob(\'' + j.id + '\')" title="Apagar do servidor agora">🗑 Excluir</button>' +
+            '<a class="btn btn-green" href="' + fileUrl + '" download="' + (j.file_name || '') + '" target="_blank" rel="noopener">' +
+              SAVE_SVG +
+              '<span>Salvar no Aparelho' + (j.file_size_human ? ' (' + j.file_size_human + ')' : '') + '</span>' +
+            '</a>' +
+            '<button id="share-btn-' + j.id + '" class="btn btn-share" type="button" onclick="shareJobFile('' + j.id + '')">' +
+              SHARE_SVG +
+              '<span>Compartilhar</span>' +
+            '</button>' +
+            '<button class="btn btn-danger" type="button" style="flex:0 0 auto" onclick="deleteJob('' + j.id + '')" title="Apagar do servidor agora">' +
+              TRASH_SVG +
+              '<span>Excluir</span>' +
+            '</button>' +
           '</div>';
       } else if (j.state === 'queued' || j.state === 'downloading' || j.state === 'processing') {
         actionsHtml =
