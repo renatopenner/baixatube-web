@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>
+(function(){
+  try {
+    var m = document.cookie.match(/(?:^|;\s*)pt_tema=(escuro|claro)/);
+    var saved = localStorage.getItem('pt_tema');
+    document.documentElement.setAttribute('data-tema', (m && m[1]) || saved || 'claro');
+  } catch (e) {
+    document.documentElement.setAttribute('data-tema', 'claro');
+  }
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>BaixaTube para Windows — Programa Grátis para Baixar Vídeos do YouTube · Penner Tech</title>
+<meta name="description" content="Conheça o BaixaTube para Windows e o BaixaTube Web: baixe vídeos do YouTube em 4K, MP4 e MP3 com fila de downloads, FFmpeg integrado e zero anúncios.">
+<meta name="author" content="Renato Penner — Penner Tech">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://baixatube.pennertech.com.br/windows/">
+<link rel="alternate" hreflang="pt-BR" href="https://baixatube.pennertech.com.br/windows/">
+<meta name="theme-color" content="#f7fafc" id="meta-theme-color">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BaixaTube Web · Penner Tech">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BaixaTube para Windows — Programa Grátis para Baixar Vídeos do YouTube · Penner Tech">
+<meta property="og:description" content="Conheça o BaixaTube para Windows e o BaixaTube Web: baixe vídeos do YouTube em 4K, MP4 e MP3 com fila de downloads, FFmpeg integrado e zero anúncios.">
+<meta property="og:url" content="https://baixatube.pennertech.com.br/windows/">
+<meta property="og:image" content="https://baixatube.pennertech.com.br/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BaixaTube para Windows — Programa Grátis para Baixar Vídeos do YouTube · Penner Tech">
+<meta name="twitter:description" content="Conheça o BaixaTube para Windows e o BaixaTube Web: baixe vídeos do YouTube em 4K, MP4 e MP3 com fila de downloads, FFmpeg integrado e zero anúncios.">
+<meta name="twitter:image" content="https://baixatube.pennertech.com.br/img/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180">
+<link rel="stylesheet" href="../css/guias.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "BaixaTube Web",
+          "item": "https://baixatube.pennertech.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "BaixaTube Windows",
+          "item": "https://baixatube.pennertech.com.br/windows/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "BaixaTube para Windows",
+      "description": "Conheça o BaixaTube para Windows e o BaixaTube Web: baixe vídeos do YouTube em 4K, MP4 e MP3 com fila de downloads, FFmpeg integrado e zero anúncios.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Copie a URL no navegador",
+          "text": "Copie o endereço do vídeo no YouTube, Instagram, TikTok ou Facebook."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Escolha a resolução",
+          "text": "Selecione MP4 4K, 1080p, Original MKV ou MP3 320 kbps conforme sua necessidade."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Salve direto no computador",
+          "text": "O processamento com yt-dlp e FFmpeg entrega o arquivo pronto na pasta de Downloads do Windows."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Preciso instalar o BaixaTube no Windows para baixar vídeos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não necessariamente. O BaixaTube Web funciona direto no Chrome, Edge ou Firefox no Windows sem instalação."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qual formato escolher para editar vídeo no PC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para editores como Premiere, DaVinci Resolve ou CapCut, escolha MP4 (1080p ou 4K) que já vem em H.264/AAC."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Onde encontro outros programas seguros para Windows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No portal Baixa Certa (baixa.pennertech.com.br), mantido pela Penner Tech apenas com links oficiais dos desenvolvedores."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="../">
+      <svg viewBox="0 0 64 64" role="img" aria-label="BaixaTube">
+        <defs>
+          <linearGradient id="btG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="55%" stop-color="#0ea5e9"/>
+            <stop offset="100%" stop-color="#ef4444"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="16" fill="url(#btG)"/>
+        <path d="M32 15v21" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/>
+        <path d="m22 28 10 10 10-10" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M18 47h28" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".92"/>
+      </svg>
+      <div class="brand-txt">
+        <strong>BAIXA<em>TUBE</em> WEB</strong>
+        <small>Penner Tech · Celular &amp; PC</small>
+      </div>
+    </a>
+    <div class="nav-right">
+      <a class="nav-pill loja-pill" href="https://loja.pennertech.com.br/" target="_blank" rel="noopener">
+        <img src="../img/pennertech-marca.png" alt="Penner Tech" width="20" height="20">
+        <span>Loja Penner Tech</span>
+        <span class="pill-tag">Ofertas</span>
+      </a>
+      <a class="nav-pill baixa-pill" href="https://baixa.pennertech.com.br/" target="_blank" rel="noopener">
+        <img src="../img/baixacerta-ico.svg" alt="Baixa Certa" width="20" height="20">
+        <span>Baixa Certa</span>
+        <span class="pill-tag">Apps Grátis</span>
+      </a>
+      <button id="btn-tema" class="btn-tema" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="breadcrumb" aria-label="Navegação estrutural">
+    <a href="../">BaixaTube Web</a>
+    <span>/</span>
+    <span>BaixaTube Windows</span>
+  </nav>
+
+  <section class="guide-hero">
+    <span class="guide-badge">Desktop & Web · Penner Tech</span>
+    <h1>BaixaTube para <em>Windows e Navegador</em></h1>
+    <p>Use o BaixaTube Web direto no navegador do Windows sem instalar nada ou conheça os recursos da versão desktop da Penner Tech para downloads em fila e 4K.</p>
+    <div class="cta-row">
+      <a class="btn-cta" href="../">🌐 Usar BaixaTube Web no PC</a>
+      <a class="btn-sec" href="https://baixa.pennertech.com.br/" target="_blank" rel="noopener">🛡️ Ver Apps no Baixa Certa</a>
+    </div>
+  </section>
+
+  <h2 class="sec-title">Como baixar vídeos do YouTube no PC</h2>
+  <section class="steps-grid">
+    <article class="step-card"><div class="step-num">1</div><h2>Copie a URL no navegador</h2><p>Copie o endereço do vídeo no YouTube, Instagram, TikTok ou Facebook.</p></article>
+    <article class="step-card"><div class="step-num">2</div><h2>Escolha a resolução</h2><p>Selecione MP4 4K, 1080p, Original MKV ou MP3 320 kbps conforme sua necessidade.</p></article>
+    <article class="step-card"><div class="step-num">3</div><h2>Salve direto no computador</h2><p>O processamento com yt-dlp e FFmpeg entrega o arquivo pronto na pasta de Downloads do Windows.</p></article>
+  </section>
+
+  <section class="info-grid">
+    <article class="info-card"><h3>🖥️ Zero anúncios e sem adware</h3><p>Desenvolvido pela Penner Tech com foco em segurança: nada de instaladores com barras de navegador ou extensões ocultas.</p></article>
+    <article class="info-card"><h3>🎬 4K e formatos compatíveis</h3><p>Preset MP4 H.264/AAC garante compatibilidade com Windows Media Player, VLC, Premiere e Smart TVs.</p></article>
+    <article class="info-card"><h3>🛡️ Mais apps verificados</h3><p>Procurando outros utilitários limpos para Windows? Confira o portal Baixa Certa com links oficiais de fabricantes.</p></article>
+  </section>
+
+  <section class="faq-sec" aria-label="Perguntas Frequentes">
+    <h2>❓ Perguntas Frequentes</h2>
+    <div class="faq-list">
+      <details class="faq-item" open><summary>Preciso instalar o BaixaTube no Windows para baixar vídeos?</summary><p>Não necessariamente. O BaixaTube Web funciona direto no Chrome, Edge ou Firefox no Windows sem instalação.</p></details>
+      <details class="faq-item"><summary>Qual formato escolher para editar vídeo no PC?</summary><p>Para editores como Premiere, DaVinci Resolve ou CapCut, escolha MP4 (1080p ou 4K) que já vem em H.264/AAC.</p></details>
+      <details class="faq-item"><summary>Onde encontro outros programas seguros para Windows?</summary><p>No portal Baixa Certa (baixa.pennertech.com.br), mantido pela Penner Tech apenas com links oficiais dos desenvolvedores.</p></details>
+    </div>
+  </section>
+
+  <nav class="guides-nav" aria-label="Outros guias do BaixaTube">
+    <h2>📚 Guias do BaixaTube Web</h2>
+    <div class="guides-links">
+      <a href="../">Ferramenta Principal</a>
+      <a href="../baixar-video-youtube-celular/">YouTube no Celular</a>
+      <a href="../youtube-para-mp3/">YouTube para MP3</a>
+      <a href="../baixar-reels-instagram/">Reels do Instagram</a>
+      <a href="../baixar-video-tiktok/">TikTok sem marca</a>
+      <a href="../windows/" class="ativo">BaixaTube Windows</a>
+    </div>
+  </nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>BaixaTube Web</strong> · Ecossistema <a href="https://loja.pennertech.com.br/">Penner Tech</a> &amp; <a href="https://baixa.pennertech.com.br/">Baixa Certa</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('btn-tema');
+  var meta = document.getElementById('meta-theme-color');
+  function sync() {
+    var t = document.documentElement.getAttribute('data-tema') || 'claro';
+    btn.textContent = t === 'escuro' ? '☀️' : '🌙';
+    if (meta) meta.setAttribute('content', t === 'escuro' ? '#070d17' : '#f7fafc');
+  }
+  sync();
+  btn.addEventListener('click', function(){
+    var t = document.documentElement.getAttribute('data-tema') || 'claro';
+    var n = t === 'escuro' ? 'claro' : 'escuro';
+    document.documentElement.setAttribute('data-tema', n);
+    try {
+      localStorage.setItem('pt_tema', n);
+      document.cookie = 'pt_tema=' + n + ';path=/;max-age=31536000;SameSite=Lax';
+    } catch (e) {}
+    sync();
+  });
+})();
+</script>
+</body>
+</html>

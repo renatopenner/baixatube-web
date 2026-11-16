@@ -1005,6 +1005,29 @@ footer a { font-weight: 600; }
   .eco-body p { font-size: 0.8rem; margin-bottom: 9px; }
   .eco-cta { width: 100%; justify-content: center; padding: 7px 11px; font-size: 0.79rem; }
 }
+.guides-nav {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 0 0 26px;
+}
+.guides-nav h3 { font-size: 0.94rem; font-weight: 800; margin-bottom: 10px; }
+.guides-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.guides-links a {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  background: var(--card2);
+  color: var(--texto);
+}
+.guides-links a:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+  background: var(--acento-suave);
+}
 </style>
 </head>
 <body>
@@ -1179,6 +1202,17 @@ footer a { font-weight: 600; }
       </details>
     </div>
   </section>
+
+  <nav class="guides-nav" aria-label="Guias rápidos do BaixaTube Web">
+    <h3>📚 Guias por plataforma e formato</h3>
+    <div class="guides-links">
+      <a href="baixar-video-youtube-celular/">Baixar YouTube no Celular</a>
+      <a href="youtube-para-mp3/">Converter YouTube para MP3</a>
+      <a href="baixar-reels-instagram/">Baixar Reels do Instagram</a>
+      <a href="baixar-video-tiktok/">Baixar TikTok sem Marca d'Água</a>
+      <a href="windows/">BaixaTube para Windows</a>
+    </div>
+  </nav>
 </main>
 
 <div class="share-modal-backdrop" id="share-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
